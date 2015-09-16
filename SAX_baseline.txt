@@ -1,0 +1,370 @@
+50words
+	Euclidean: 287 out of 455 , %63.08 correct, 36784.00 millis
+	SAX 4 3: 190 out of 455 , %41.76 correct, 52562.15 millis
+	SAX 4 4: 266 out of 455 , %58.46 correct, 75105.37 millis
+	SAX 4 5: 274 out of 455 , %60.22 correct, 88266.91 millis
+	SAX 4 6: 288 out of 455 , %63.30 correct, 100590.73 millis
+	SAX 4 7: 296 out of 455 , %65.05 correct, 110447.46 millis
+	SAX 4 8: 302 out of 455 , %66.37 correct, 119284.09 millis
+	SAX 4 9: 305 out of 455 , %67.03 correct, 124681.43 millis
+	SAX 4 10: 300 out of 455 , %65.93 correct, 131478.22 millis
+MedicalImages
+	Euclidean: 520 out of 760 , %68.42 correct, 19871.30 millis
+	SAX 4 3: 364 out of 760 , %47.89 correct, 12017.24 millis
+	SAX 4 4: 307 out of 760 , %40.39 correct, 20230.06 millis
+	SAX 4 5: 397 out of 760 , %52.24 correct, 26937.52 millis
+	SAX 4 6: 398 out of 760 , %52.37 correct, 32479.79 millis
+	SAX 4 7: 440 out of 760 , %57.89 correct, 37095.92 millis
+	SAX 4 8: 457 out of 760 , %60.13 correct, 43879.90 millis
+	SAX 4 9: 456 out of 760 , %60.00 correct, 47070.77 millis
+	SAX 4 10: 479 out of 760 , %63.03 correct, 51262.55 millis
+Adiac
+	Euclidean: 239 out of 391 , %61.13 correct, 19008.83 millis
+	SAX 4 3: 10 out of 391 , %2.56 correct, 7673.45 millis
+	SAX 4 4: 10 out of 391 , %2.56 correct, 7770.92 millis
+	SAX 4 5: 14 out of 391 , %3.58 correct, 8700.54 millis
+	SAX 4 6: 14 out of 391 , %3.58 correct, 10331.14 millis
+	SAX 4 7: 16 out of 391 , %4.09 correct, 10695.80 millis
+	SAX 4 8: 26 out of 391 , %6.65 correct, 11701.81 millis
+	SAX 4 9: 32 out of 391 , %8.18 correct, 13362.25 millis
+	SAX 4 10: 38 out of 391 , %9.72 correct, 14484.66 millis
+MiddlePhalanxOutlineAgeGroup
+	Euclidean: 296 out of 400 , %74.00 correct, 3465.94 millis
+	SAX 4 3: 108 out of 400 , %27.00 correct, 1551.52 millis
+	SAX 4 4: 108 out of 400 , %27.00 correct, 1532.59 millis
+	SAX 4 5: 108 out of 400 , %27.00 correct, 1563.50 millis
+	SAX 4 6: 108 out of 400 , %27.00 correct, 1707.14 millis
+	SAX 4 7: 110 out of 400 , %27.50 correct, 1974.17 millis
+	SAX 4 8: 116 out of 400 , %29.00 correct, 1912.99 millis
+	SAX 4 9: 109 out of 400 , %27.25 correct, 2122.50 millis
+	SAX 4 10: 115 out of 400 , %28.75 correct, 2416.20 millis
+ArrowHead
+	Euclidean: 140 out of 175 , %80.00 correct, 1058.39 millis
+	SAX 4 3: 68 out of 175 , %38.86 correct, 806.27 millis
+	SAX 4 4: 77 out of 175 , %44.00 correct, 1014.45 millis
+	SAX 4 5: 77 out of 175 , %44.00 correct, 1265.78 millis
+	SAX 4 6: 90 out of 175 , %51.43 correct, 1404.75 millis
+	SAX 4 7: 95 out of 175 , %54.29 correct, 1552.06 millis
+	SAX 4 8: 97 out of 175 , %55.43 correct, 1744.78 millis
+	SAX 4 9: 105 out of 175 , %60.00 correct, 1869.55 millis
+	SAX 4 10: 122 out of 175 , %69.71 correct, 2021.40 millis
+MiddlePhalanxOutlineCorrect
+	Euclidean: 452 out of 600 , %75.33 correct, 9942.45 millis
+	SAX 4 3: 212 out of 600 , %35.33 correct, 4137.17 millis
+	SAX 4 4: 212 out of 600 , %35.33 correct, 4087.15 millis
+	SAX 4 5: 212 out of 600 , %35.33 correct, 4128.19 millis
+	SAX 4 6: 213 out of 600 , %35.50 correct, 4481.76 millis
+	SAX 4 7: 210 out of 600 , %35.00 correct, 5140.14 millis
+	SAX 4 8: 211 out of 600 , %35.17 correct, 5109.20 millis
+	SAX 4 9: 213 out of 600 , %35.50 correct, 5654.98 millis
+	SAX 4 10: 210 out of 600 , %35.00 correct, 6321.60 millis
+Beef
+	Euclidean: 20 out of 30 , %66.67 correct, 297.18 millis
+	SAX 4 3: 10 out of 30 , %33.33 correct, 303.74 millis
+	SAX 4 4: 10 out of 30 , %33.33 correct, 369.17 millis
+	SAX 4 5: 11 out of 30 , %36.67 correct, 404.64 millis
+	SAX 4 6: 13 out of 30 , %43.33 correct, 443.63 millis
+	SAX 4 7: 10 out of 30 , %33.33 correct, 478.72 millis
+	SAX 4 8: 14 out of 30 , %46.67 correct, 526.14 millis
+	SAX 4 9: 14 out of 30 , %46.67 correct, 558.60 millis
+	SAX 4 10: 15 out of 30 , %50.00 correct, 623.89 millis
+MiddlePhalanxTW
+	Euclidean: 224 out of 399 , %56.14 correct, 3478.67 millis
+	SAX 4 3: 160 out of 399 , %40.10 correct, 1521.76 millis
+	SAX 4 4: 159 out of 399 , %39.85 correct, 1553.81 millis
+	SAX 4 5: 160 out of 399 , %40.10 correct, 1577.34 millis
+	SAX 4 6: 164 out of 399 , %41.10 correct, 1651.42 millis
+	SAX 4 7: 181 out of 399 , %45.36 correct, 1883.55 millis
+	SAX 4 8: 165 out of 399 , %41.35 correct, 1878.42 millis
+	SAX 4 9: 170 out of 399 , %42.61 correct, 2029.75 millis
+	SAX 4 10: 198 out of 399 , %49.62 correct, 2375.03 millis
+BeetleFly
+	Euclidean: 15 out of 20 , %75.00 correct, 134.13 millis
+	SAX 4 3: 13 out of 20 , %65.00 correct, 324.22 millis
+	SAX 4 4: 15 out of 20 , %75.00 correct, 427.38 millis
+	SAX 4 5: 15 out of 20 , %75.00 correct, 494.75 millis
+	SAX 4 6: 15 out of 20 , %75.00 correct, 572.39 millis
+	SAX 4 7: 14 out of 20 , %70.00 correct, 600.60 millis
+	SAX 4 8: 14 out of 20 , %70.00 correct, 647.19 millis
+	SAX 4 9: 15 out of 20 , %75.00 correct, 652.43 millis
+	SAX 4 10: 15 out of 20 , %75.00 correct, 656.84 millis
+MoteStrain
+	Euclidean: 1100 out of 1252 , %87.86 correct, 1484.75 millis
+	SAX 4 3: 501 out of 1252 , %40.02 correct, 1738.73 millis
+	SAX 4 4: 905 out of 1252 , %72.28 correct, 2396.64 millis
+	SAX 4 5: 982 out of 1252 , %78.43 correct, 3084.31 millis
+	SAX 4 6: 996 out of 1252 , %79.55 correct, 3511.80 millis
+	SAX 4 7: 977 out of 1252 , %78.04 correct, 3973.05 millis
+	SAX 4 8: 998 out of 1252 , %79.71 correct, 4369.32 millis
+	SAX 4 9: 997 out of 1252 , %79.63 correct, 4787.37 millis
+	SAX 4 10: 987 out of 1252 , %78.83 correct, 5094.80 millis
+BirdChicken
+	Euclidean: 11 out of 20 , %55.00 correct, 137.72 millis
+	SAX 4 3: 10 out of 20 , %50.00 correct, 275.46 millis
+	SAX 4 4: 13 out of 20 , %65.00 correct, 352.09 millis
+	SAX 4 5: 12 out of 20 , %60.00 correct, 417.54 millis
+	SAX 4 6: 13 out of 20 , %65.00 correct, 461.53 millis
+	SAX 4 7: 12 out of 20 , %60.00 correct, 547.03 millis
+	SAX 4 8: 11 out of 20 , %55.00 correct, 564.87 millis
+	SAX 4 9: 11 out of 20 , %55.00 correct, 564.80 millis
+	SAX 4 10: 11 out of 20 , %55.00 correct, 600.50 millis
+NonInvasiveFatalECG_Thorax1
+	Euclidean: 1629 out of 1965 , %82.90 correct, 1831759.42 millis
+	SAX 4 3: 143 out of 1965 , %7.28 correct, 698592.33 millis
+	SAX 4 4: 176 out of 1965 , %8.96 correct, 759678.39 millis
+	SAX 4 5: 260 out of 1965 , %13.23 correct, 834976.54 millis
+	SAX 4 6: 416 out of 1965 , %21.17 correct, 963234.93 millis
+	SAX 4 7: 570 out of 1965 , %29.01 correct, 1106415.94 millis
+	SAX 4 8: 694 out of 1965 , %35.32 correct, 1208442.93 millis
+	SAX 4 9: 866 out of 1965 , %44.07 correct, 1512348.01 millis
+	SAX 4 10: 967 out of 1965 , %49.21 correct, 1706826.15 millis
+CBF
+	Euclidean: 767 out of 900 , %85.22 correct, 2794.61 millis
+	SAX 4 3: 556 out of 900 , %61.78 correct, 4290.89 millis
+	SAX 4 4: 691 out of 900 , %76.78 correct, 5092.69 millis
+	SAX 4 5: 693 out of 900 , %77.00 correct, 6035.65 millis
+	SAX 4 6: 745 out of 900 , %82.78 correct, 6830.47 millis
+	SAX 4 7: 756 out of 900 , %84.00 correct, 7544.54 millis
+	SAX 4 8: 785 out of 900 , %87.22 correct, 8040.93 millis
+	SAX 4 9: 797 out of 900 , %88.56 correct, 8632.87 millis
+	SAX 4 10: 804 out of 900 , %89.33 correct, 9346.03 millis
+NonInvasiveFatalECG_Thorax2
+	Euclidean: 1729 out of 1965 , %87.99 correct, 2008273.93 millis
+	SAX 4 3: 99 out of 1965 , %5.04 correct, 702523.34 millis
+	SAX 4 4: 259 out of 1965 , %13.18 correct, 813029.25 millis
+	SAX 4 5: 362 out of 1965 , %18.42 correct, 912795.18 millis
+	SAX 4 6: 507 out of 1965 , %25.80 correct, 1016609.10 millis
+	SAX 4 7: 659 out of 1965 , %33.54 correct, 1076267.51 millis
+	SAX 4 8: 769 out of 1965 , %39.13 correct, 1197269.33 millis
+	SAX 4 9: 911 out of 1965 , %46.36 correct, 1541396.90 millis
+	SAX 4 10: 1004 out of 1965 , %51.09 correct, 1669263.19 millis
+Car
+	Euclidean: 44 out of 60 , %73.33 correct, 1454.64 millis
+	SAX 4 3: 19 out of 60 , %31.67 correct, 1227.49 millis
+	SAX 4 4: 27 out of 60 , %45.00 correct, 1390.21 millis
+	SAX 4 5: 30 out of 60 , %50.00 correct, 1720.89 millis
+	SAX 4 6: 29 out of 60 , %48.33 correct, 2020.00 millis
+	SAX 4 7: 35 out of 60 , %58.33 correct, 2320.60 millis
+	SAX 4 8: 36 out of 60 , %60.00 correct, 2566.78 millis
+	SAX 4 9: 40 out of 60 , %66.67 correct, 2888.67 millis
+	SAX 4 10: 44 out of 60 , %73.33 correct, 3216.55 millis
+OSULeaf
+	Euclidean: 126 out of 242 , %52.07 correct, 15813.49 millis
+	SAX 4 3: 110 out of 242 , %45.45 correct, 23510.98 millis
+	SAX 4 4: 119 out of 242 , %49.17 correct, 34010.54 millis
+	SAX 4 5: 115 out of 242 , %47.52 correct, 42371.61 millis
+	SAX 4 6: 129 out of 242 , %53.31 correct, 52686.14 millis
+	SAX 4 7: 133 out of 242 , %54.96 correct, 51395.04 millis
+	SAX 4 8: 128 out of 242 , %52.89 correct, 55080.41 millis
+	SAX 4 9: 127 out of 242 , %52.48 correct, 57570.74 millis
+	SAX 4 10: 131 out of 242 , %54.13 correct, 59768.06 millis
+ChlorineConcentration
+	Euclidean: 2496 out of 3840 , %65.00 correct, 213074.19 millis
+	SAX 4 3: 1170 out of 3840 , %30.47 correct, 103851.49 millis
+	SAX 4 4: 993 out of 3840 , %25.86 correct, 121669.55 millis
+	SAX 4 5: 1131 out of 3840 , %29.45 correct, 162714.63 millis
+	SAX 4 6: 1292 out of 3840 , %33.65 correct, 211135.89 millis
+	SAX 4 7: 1237 out of 3840 , %32.21 correct, 245930.66 millis
+	SAX 4 8: 1344 out of 3840 , %35.00 correct, 289329.31 millis
+	SAX 4 9: 1468 out of 3840 , %38.23 correct, 331193.32 millis
+	SAX 4 10: 1501 out of 3840 , %39.09 correct, 370642.05 millis
+OliveOil
+	Euclidean: 26 out of 30 , %86.67 correct, 355.06 millis
+	SAX 4 3: 5 out of 30 , %16.67 correct, 291.46 millis
+	SAX 4 4: 5 out of 30 , %16.67 correct, 301.15 millis
+	SAX 4 5: 5 out of 30 , %16.67 correct, 329.86 millis
+	SAX 4 6: 5 out of 30 , %16.67 correct, 313.32 millis
+	SAX 4 7: 5 out of 30 , %16.67 correct, 310.33 millis
+	SAX 4 8: 5 out of 30 , %16.67 correct, 293.58 millis
+	SAX 4 9: 5 out of 30 , %16.67 correct, 336.27 millis
+	SAX 4 10: 5 out of 30 , %16.67 correct, 299.39 millis
+CinC_ECG_torso
+	Euclidean: 1238 out of 1380 , %89.71 correct, 61030.05 millis
+	SAX 4 3: 368 out of 1380 , %26.67 correct, 53621.26 millis
+	SAX 4 4: 964 out of 1380 , %69.86 correct, 80376.86 millis
+	SAX 4 5: 1159 out of 1380 , %83.99 correct, 113390.73 millis
+	SAX 4 6: 1171 out of 1380 , %84.86 correct, 133481.74 millis
+	SAX 4 7: 1212 out of 1380 , %87.83 correct, 156414.71 millis
+	SAX 4 8: 1229 out of 1380 , %89.06 correct, 174672.31 millis
+	SAX 4 9: 1234 out of 1380 , %89.42 correct, 189588.40 millis
+	SAX 4 10: 1237 out of 1380 , %89.64 correct, 212728.67 millis
+PhalangesOutlinesCorrect
+	Euclidean: 653 out of 858 , %76.11 correct, 87182.72 millis
+	SAX 4 3: 533 out of 858 , %62.12 correct, 32151.30 millis
+	SAX 4 4: 535 out of 858 , %62.35 correct, 33765.56 millis
+	SAX 4 5: 545 out of 858 , %63.52 correct, 36791.12 millis
+	SAX 4 6: 497 out of 858 , %57.93 correct, 42067.62 millis
+	SAX 4 7: 415 out of 858 , %48.37 correct, 47896.90 millis
+	SAX 4 8: 488 out of 858 , %56.88 correct, 51168.60 millis
+	SAX 4 9: 427 out of 858 , %49.77 correct, 56837.94 millis
+	SAX 4 10: 420 out of 858 , %48.95 correct, 65151.87 millis
+Coffee
+	Euclidean: 28 out of 28 , %100.00 correct, 147.28 millis
+	SAX 4 3: 15 out of 28 , %53.57 correct, 153.56 millis
+	SAX 4 4: 15 out of 28 , %53.57 correct, 153.69 millis
+	SAX 4 5: 15 out of 28 , %53.57 correct, 143.07 millis
+	SAX 4 6: 15 out of 28 , %53.57 correct, 135.53 millis
+	SAX 4 7: 15 out of 28 , %53.57 correct, 149.72 millis
+	SAX 4 8: 15 out of 28 , %53.57 correct, 142.51 millis
+	SAX 4 9: 15 out of 28 , %53.57 correct, 135.69 millis
+	SAX 4 10: 15 out of 28 , %53.57 correct, 152.27 millis
+Phoneme
+	Euclidean: 207 out of 1896 , %10.92 correct, 281653.14 millis
+	SAX 4 3: 37 out of 1896 , %1.95 correct, 298147.41 millis
+	SAX 4 4: 102 out of 1896 , %5.38 correct, 602595.73 millis
+	SAX 4 5: 78 out of 1896 , %4.11 correct, 721113.70 millis
+	SAX 4 6: 95 out of 1896 , %5.01 correct, 815365.43 millis
+	SAX 4 7: 92 out of 1896 , %4.85 correct, 1239186.46 millis
+	SAX 4 8: 107 out of 1896 , %5.64 correct, 1058935.02 millis
+	SAX 4 9: 98 out of 1896 , %5.17 correct, 1066494.70 millis
+	SAX 4 10: 100 out of 1896 , %5.27 correct, 1152298.23 millis
+Computers
+	Euclidean: 144 out of 250 , %57.60 correct, 30344.82 millis
+	SAX 4 3: 124 out of 250 , %49.60 correct, 22447.07 millis
+	SAX 4 4: 109 out of 250 , %43.60 correct, 49947.00 millis
+	SAX 4 5: 129 out of 250 , %51.60 correct, 57141.53 millis
+	SAX 4 6: 125 out of 250 , %50.00 correct, 63032.86 millis
+	SAX 4 7: 126 out of 250 , %50.40 correct, 67280.34 millis
+	SAX 4 8: 120 out of 250 , %48.00 correct, 74706.97 millis
+	SAX 4 9: 122 out of 250 , %48.80 correct, 77485.53 millis
+	SAX 4 10: 127 out of 250 , %50.80 correct, 84601.43 millis
+Plane
+	Euclidean: 101 out of 105 , %96.19 correct, 1073.92 millis
+	SAX 4 3: 49 out of 105 , %46.67 correct, 990.34 millis
+	SAX 4 4: 81 out of 105 , %77.14 correct, 1371.31 millis
+	SAX 4 5: 84 out of 105 , %80.00 correct, 1701.76 millis
+	SAX 4 6: 92 out of 105 , %87.62 correct, 2005.38 millis
+	SAX 4 7: 91 out of 105 , %86.67 correct, 2319.18 millis
+	SAX 4 8: 97 out of 105 , %92.38 correct, 2569.17 millis
+	SAX 4 9: 96 out of 105 , %91.43 correct, 2675.78 millis
+	SAX 4 10: 97 out of 105 , %92.38 correct, 2840.15 millis
+Cricket_X
+	Euclidean: 225 out of 390 , %57.69 correct, 30712.01 millis
+	SAX 4 3: 128 out of 390 , %32.82 correct, 46338.70 millis
+	SAX 4 4: 191 out of 390 , %48.97 correct, 67556.31 millis
+	SAX 4 5: 215 out of 390 , %55.13 correct, 82204.27 millis
+	SAX 4 6: 221 out of 390 , %56.67 correct, 93887.62 millis
+	SAX 4 7: 222 out of 390 , %56.92 correct, 102260.80 millis
+	SAX 4 8: 240 out of 390 , %61.54 correct, 109629.23 millis
+	SAX 4 9: 240 out of 390 , %61.54 correct, 114924.55 millis
+	SAX 4 10: 236 out of 390 , %60.51 correct, 119224.47 millis
+ProximalPhalanxOutlineAgeGroup
+	Euclidean: 161 out of 205 , %78.54 correct, 4542.20 millis
+	SAX 4 3: 88 out of 205 , %42.93 correct, 1932.44 millis
+	SAX 4 4: 88 out of 205 , %42.93 correct, 1956.73 millis
+	SAX 4 5: 88 out of 205 , %42.93 correct, 1923.39 millis
+	SAX 4 6: 90 out of 205 , %43.90 correct, 1978.68 millis
+	SAX 4 7: 88 out of 205 , %42.93 correct, 2009.63 millis
+	SAX 4 8: 88 out of 205 , %42.93 correct, 2117.92 millis
+	SAX 4 9: 92 out of 205 , %44.88 correct, 2199.61 millis
+	SAX 4 10: 88 out of 205 , %42.93 correct, 2384.55 millis
+Cricket_Y
+	Euclidean: 221 out of 390 , %56.67 correct, 30298.50 millis
+	SAX 4 3: 111 out of 390 , %28.46 correct, 42066.03 millis
+	SAX 4 4: 182 out of 390 , %46.67 correct, 65483.76 millis
+	SAX 4 5: 188 out of 390 , %48.21 correct, 79447.09 millis
+	SAX 4 6: 192 out of 390 , %49.23 correct, 91370.22 millis
+	SAX 4 7: 204 out of 390 , %52.31 correct, 100473.69 millis
+	SAX 4 8: 208 out of 390 , %53.33 correct, 108190.10 millis
+	SAX 4 9: 209 out of 390 , %53.59 correct, 114199.83 millis
+	SAX 4 10: 217 out of 390 , %55.64 correct, 119549.25 millis
+ProximalPhalanxOutlineCorrect
+	Euclidean: 235 out of 291 , %80.76 correct, 9801.98 millis
+	SAX 4 3: 199 out of 291 , %68.38 correct, 3857.61 millis
+	SAX 4 4: 199 out of 291 , %68.38 correct, 3891.10 millis
+	SAX 4 5: 199 out of 291 , %68.38 correct, 3905.07 millis
+	SAX 4 6: 197 out of 291 , %67.70 correct, 4024.73 millis
+	SAX 4 7: 202 out of 291 , %69.42 correct, 4191.56 millis
+	SAX 4 8: 211 out of 291 , %72.51 correct, 4358.25 millis
+	SAX 4 9: 197 out of 291 , %67.70 correct, 4560.15 millis
+	SAX 4 10: 199 out of 291 , %68.38 correct, 5351.53 millis
+Cricket_Z
+	Euclidean: 229 out of 390 , %58.72 correct, 30844.94 millis
+	SAX 4 3: 127 out of 390 , %32.56 correct, 46466.68 millis
+	SAX 4 4: 201 out of 390 , %51.54 correct, 67434.77 millis
+	SAX 4 5: 224 out of 390 , %57.44 correct, 82137.40 millis
+	SAX 4 6: 229 out of 390 , %58.72 correct, 93247.68 millis
+	SAX 4 7: 230 out of 390 , %58.97 correct, 102025.71 millis
+	SAX 4 8: 232 out of 390 , %59.49 correct, 110259.30 millis
+	SAX 4 9: 238 out of 390 , %61.03 correct, 115063.35 millis
+	SAX 4 10: 234 out of 390 , %60.00 correct, 28570645.61 millis
+ProximalPhalanxTW
+	Euclidean: 283 out of 400 , %70.75 correct, 4905.32 millis
+	SAX 4 3: 180 out of 400 , %45.00 correct, 2199.59 millis
+	SAX 4 4: 180 out of 400 , %45.00 correct, 2036.28 millis
+	SAX 4 5: 180 out of 400 , %45.00 correct, 2012.17 millis
+	SAX 4 6: 183 out of 400 , %45.75 correct, 2119.36 millis
+	SAX 4 7: 180 out of 400 , %45.00 correct, 2119.04 millis
+	SAX 4 8: 180 out of 400 , %45.00 correct, 2288.73 millis
+	SAX 4 9: 186 out of 400 , %46.50 correct, 2300.68 millis
+	SAX 4 10: 209 out of 400 , %52.25 correct, 2655.33 millis
+DiatomSizeReduction
+	Euclidean: 286 out of 306 , %93.46 correct, 1249.49 millis
+	SAX 4 3: 92 out of 306 , %30.07 correct, 1186.93 millis
+	SAX 4 4: 94 out of 306 , %30.72 correct, 1135.19 millis
+	SAX 4 5: 94 out of 306 , %30.72 correct, 1144.76 millis
+	SAX 4 6: 117 out of 306 , %38.24 correct, 1286.42 millis
+	SAX 4 7: 166 out of 306 , %54.25 correct, 1394.89 millis
+	SAX 4 8: 183 out of 306 , %59.80 correct, 1315.15 millis
+	SAX 4 9: 229 out of 306 , %74.84 correct, 1367.86 millis
+	SAX 4 10: 259 out of 306 , %84.64 correct, 1405.72 millis
+RefrigerationDevices
+	Euclidean: 148 out of 375 , %39.47 correct, 72987.77 millis
+	SAX 4 3: 139 out of 375 , %37.07 correct, 138326.85 millis
+	SAX 4 4: 117 out of 375 , %31.20 correct, 163696.64 millis
+	SAX 4 5: 125 out of 375 , %33.33 correct, 186857.34 millis
+	SAX 4 6: 126 out of 375 , %33.60 correct, 5030772.07 millis
+	SAX 4 7: 121 out of 375 , %32.27 correct, 216354.27 millis
+	SAX 4 8: 126 out of 375 , %33.60 correct, 228667.27 millis
+	SAX 4 9: 122 out of 375 , %32.53 correct, 346850.92 millis
+	SAX 4 10: 121 out of 375 , %32.27 correct, 246439.25 millis
+DistalPhalanxOutlineAgeGroup
+	Euclidean: 313 out of 400 , %78.25 correct, 3056.47 millis
+	SAX 4 3: 112 out of 400 , %28.00 correct, 1389.08 millis
+	SAX 4 4: 113 out of 400 , %28.25 correct, 1537.93 millis
+	SAX 4 5: 110 out of 400 , %27.50 correct, 1775.76 millis
+	SAX 4 6: 105 out of 400 , %26.25 correct, 2123.38 millis
+	SAX 4 7: 99 out of 400 , %24.75 correct, 2583.88 millis
+	SAX 4 8: 117 out of 400 , %29.25 correct, 2644.55 millis
+	SAX 4 9: 101 out of 400 , %25.25 correct, 2808.10 millis
+	SAX 4 10: 105 out of 400 , %26.25 correct, 3200.97 millis
+ScreenType
+	Euclidean: 135 out of 375 , %36.00 correct, 67834.11 millis
+	SAX 4 3: 123 out of 375 , %32.80 correct, 70564.55 millis
+	SAX 4 4: 134 out of 375 , %35.73 correct, 127462.27 millis
+	SAX 4 5: 121 out of 375 , %32.27 correct, 144638.54 millis
+	SAX 4 6: 131 out of 375 , %34.93 correct, 429859.12 millis
+	SAX 4 7: 119 out of 375 , %31.73 correct, 178009.75 millis
+	SAX 4 8: 121 out of 375 , %32.27 correct, 193852.67 millis
+	SAX 4 9: 121 out of 375 , %32.27 correct, 213322.78 millis
+	SAX 4 10: 129 out of 375 , %34.40 correct, 207383.80 millis
+DistalPhalanxOutlineCorrect
+	Euclidean: 451 out of 600 , %75.17 correct, 9225.21 millis
+	SAX 4 3: 383 out of 600 , %63.83 correct, 3905.94 millis
+	SAX 4 4: 352 out of 600 , %58.67 correct, 4413.39 millis
+	SAX 4 5: 308 out of 600 , %51.33 correct, 5218.81 millis
+	SAX 4 6: 253 out of 600 , %42.17 correct, 6423.35 millis
+	SAX 4 7: 273 out of 600 , %45.50 correct, 7924.70 millis
+	SAX 4 8: 376 out of 600 , %62.67 correct, 8153.38 millis
+	SAX 4 9: 281 out of 600 , %46.83 correct, 8963.20 millis
+	SAX 4 10: 287 out of 600 , %47.83 correct, 10298.59 millis
+ShapeletSim
+	Euclidean: 97 out of 180 , %53.89 correct, 1228.36 millis
+	SAX 4 3: 97 out of 180 , %53.89 correct, 1572.48 millis
+	SAX 4 4: 103 out of 180 , %57.22 correct, 2208.10 millis
+	SAX 4 5: 94 out of 180 , %52.22 correct, 2831.95 millis
+	SAX 4 6: 102 out of 180 , %56.67 correct, 3371.02 millis
+	SAX 4 7: 86 out of 180 , %47.78 correct, 3869.38 millis
+	SAX 4 8: 95 out of 180 , %52.78 correct, 4229.28 millis
+	SAX 4 9: 94 out of 180 , %52.22 correct, 4535.30 millis
+	SAX 4 10: 97 out of 180 , %53.89 correct, 4834.55 millis
+DistalPhalanxTW
+	Euclidean: 291 out of 400 , %72.75 correct, 3113.84 millis
+	SAX 4 3: 28 out of 400 , %7.00 correct, 1405.83 millis
+	SAX 4 4: 111 out of 400 , %27.75 correct, 1554.66 millis
+	SAX 4 5: 28 out of 400 , %7.00 correct, 1764.36 millis
+	SAX 4 6: 244 out of 400 , %61.00 correct, 2102.47 millis
+	SAX 4 7: 237 out of 400 , %59.25 correct, 2568.27 millis
+	SAX 4 8: 252 out of 400 , %63.00 correct, 2615.00 millis
+	SAX 4 9: 253 out of 400 , %63.25 correct, 2780.87 millis
+	SAX 4 10: 248 out of 400 , %62.00 correct, 3198.74 millis
