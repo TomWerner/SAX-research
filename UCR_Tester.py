@@ -37,11 +37,10 @@ class SAX:
         return np.array(result)
 
     def toGroupPAA(self, data):
-        result = ""
+        result = []
         n = len(data)
         numFrames = int(math.ceil(float(n) / float(self.wordSize)))
     
-        alphabet = "abcdefghijklmnopqrstuvwxyz"[0:self.alphabetSize]
         breakpoints = self.getBreakpoints()
         
         for i in range(numFrames):
@@ -58,27 +57,25 @@ class SAX:
                         break
                 if not found:
                     counts[-1] += 1
-            result += alphabet[counts.argmax()]
-            
-        return result
+            result.append(self.alphabet[counts.argmax()])
+        return np.array(result)
 
     def getBreakpoints(self):
         return self.breakpoints
 
     def toAlphabet(self, paaData):
-        alphabet = "abcdefghijklmnopqrstuvwxyz"[0:self.alphabetSize]
         breakpoints = self.getBreakpoints()
-        result = ""
+        result = []
         for point in paaData:
             found = False
             for i in range(len(breakpoints)):
                 if point < breakpoints[i] and not found:
-                    result += alphabet[i]
+                    result.append(self.alphabet[i])
                     found = True
                     break
             if not found:
-                result += alphabet[-1]
-        return result
+                result.append(self.alphabet[-1])
+        return np.array(result)
         
     def toSAX(self, data):
         self.originalLength = len(data)
@@ -111,12 +108,12 @@ class SAX:
         return math.sqrt(scalingFactor * totalDistance)
 
     def letterDistance(self, letter1, letter2):
-        if abs(ord(letter1) - ord(letter2)) <= 1:
+        if abs(letter1 - letter2) <= 1:
             return 0
-        first = max(ord(letter1), ord(letter2)) - ord('a') - 1
-        second = min(ord(letter1), ord(letter2)) - ord('a')
+        first = max(letter1, letter2) - 1
+        second = min(letter1, letter2)
         try:
-            return self.getBreakpoints()[first] - self.getBreakpoints()[second]
+            return self.breakpoints[first] - self.breakpoints[second]
         except:
             print(letter1, letter2, first, second, self.getBreakpoints(), self.alphabetSize)
             raise
@@ -187,33 +184,28 @@ def determineCorrect(trainData, trainLabels, testData, testLabels, classifyMetho
         if actualClass == predictedClass:
             correct += 1
     return correct
+
+def shiftSax(saxArray, amt):
+    return np.right_shift(saxArray, amt)
     
 #testFiles = ['CBF', 'Coffee', 'ECG200', 'FaceAll', 'FaceFour', 'Fish',
 #             'Gun_Point', 'Lighting2', 'Lighting7', 'OliveOil', 'OSULeaf',
 #             'synthetic_control', 'SwedishLeaf', 'Trace', 'Two_Patterns', 'wafer', 'yoga']
 #testFiles = ['wafer', 'yoga']
-testFiles = ['coffee']
+testFiles = ['CBF', 'synthetic_control', 'coffee', 'Fish', 'Lighting2', 'Lighting7', 'Trace']
+testFiles = ['yoga']
 for testDataSet in testFiles:
 
     trainingData, trainingLabels = loadUCRData(UCR_DIRECTORY + testDataSet + "/" + testDataSet + "_TRAIN")
     testingData, testingLabels = loadUCRData(UCR_DIRECTORY + testDataSet + "/" + testDataSet + "_TEST")
-    #testingData = testingData[0:100]
-    #testingLabels = testingLabels[0:100]
     data = [trainingData, trainingLabels, testingData, testingLabels]
     
 
     euclideanCorrect = determineCorrect(*data, classifyMethod = "Euclidean")
-    saxCorrect = []
-    saxCorrect2 = []
-    groupSaxCorrect = []
-    groupSaxCorrect2 = []
+    saxCorrect = {}
+    groupSaxCorrect = {}
     wordSizes = [1, 2, 4, 6, 8, 10, ]
-
-    #alphabetSize = 5
-    #alphabetSize2 = min(20, max(len(set(trainingLabels.flat)), 3))
-    #alphabetSize = len(set(trainingLabels.flat))
-    alphabetSize2 = 10 #len(set(trainingLabels.flat)) * 2
-    alphabetSize = 20
+    alphabetSize = 32
 
     for wordSize in wordSizes:
         print(testDataSet, "with word size", wordSize)
@@ -222,45 +214,47 @@ for testDataSet in testFiles:
         testingDataSAX = [s.toSAX(data) for data in testingData]
         trainingDataGroupSAX = [s.toGroupSAX(data) for data in trainingData]
         testingDataGroupSAX = [s.toGroupSAX(data) for data in testingData]
-        saxData = [trainingDataSAX, trainingLabels, testingDataSAX, testingLabels]
-        groupSaxData = [trainingDataGroupSAX, trainingLabels, testingDataGroupSAX, testingLabels]
 
-        saxCorrect.append(determineCorrect(*saxData, classifyMethod = "SAX", argList=[s]))
-        groupSaxCorrect.append(determineCorrect(*groupSaxData, classifyMethod = "SAX", argList=[s]))
+        for i in range(0, 4): # 32, 16, 8, 4
+            saxData = [shiftSax(trainingDataSAX, i), trainingLabels, shiftSax(testingDataSAX, i), testingLabels]
+            groupSaxData = [shiftSax(trainingDataGroupSAX, i), trainingLabels, shiftSax(testingDataGroupSAX,i), testingLabels]
 
+            key = "SAX a=%d" % (alphabetSize >> i)
+            temp = saxCorrect.get(key, [])
+            temp.append(determineCorrect(*saxData, classifyMethod = "SAX", argList=[s]))
+            saxCorrect[key] = temp
 
-        s2 = SAX(wordSize=wordSize, alphabetSize=alphabetSize2)
-        trainingDataSAX = [s2.toSAX(data) for data in trainingData]
-        testingDataSAX = [s2.toSAX(data) for data in testingData]
-        trainingDataGroupSAX = [s2.toGroupSAX(data) for data in trainingData]
-        testingDataGroupSAX = [s2.toGroupSAX(data) for data in testingData]
-        saxData2 = [trainingDataSAX, trainingLabels, testingDataSAX, testingLabels]
-        groupSaxData2 = [trainingDataGroupSAX, trainingLabels, testingDataGroupSAX, testingLabels]
-
-        saxCorrect2.append(determineCorrect(*saxData2, classifyMethod = "SAX", argList=[s2]))
-        groupSaxCorrect2.append(determineCorrect(*groupSaxData2, classifyMethod = "SAX", argList=[s2]))
+            key = 'G-' + key
+            temp = groupSaxCorrect.get(key, [])
+            temp.append(determineCorrect(*groupSaxData, classifyMethod = "SAX", argList=[s]))
+            groupSaxCorrect[key] = temp
 
     euclideanCorrect = np.array([euclideanCorrect] * len(wordSizes)) / len(testingData)
-    saxCorrect = np.array(saxCorrect) / len(testingData)
-    groupSaxCorrect = np.array(groupSaxCorrect) / len(testingData)
-    
-    saxCorrect2 = np.array(saxCorrect2) / len(testingData)
-    groupSaxCorrect2 = np.array(groupSaxCorrect2) / len(testingData)
+    for key in saxCorrect.keys():
+        saxCorrect[key] = np.array(saxCorrect[key]) / len(testingData)
+        groupSaxCorrect["G-" + key] = np.array(groupSaxCorrect["G-" + key]) / len(testingData)
     
     fig, ax = plt.subplots()
     ax.plot(wordSizes, euclideanCorrect, 'k:', label="Euclidean")
-    ax.plot(wordSizes, saxCorrect, 'r', label="SAX a=" + str(alphabetSize))
-    ax.plot(wordSizes, groupSaxCorrect, 'r--', label="Group SAX a=" + str(alphabetSize))
-    ax.plot(wordSizes, saxCorrect2, 'b', label="SAX a=" + str(alphabetSize2))
-    ax.plot(wordSizes, groupSaxCorrect2, 'b--', label="Group SAX a=" + str(alphabetSize2))
 
-    plt.title(testDataSet)
+    colors = ['red', 'blue', 'darkgreen', 'cyan']
+    for i, key in enumerate(sorted(saxCorrect.keys())):
+        ax.plot(wordSizes, saxCorrect[key], color=colors[i], label=key)
+        ax.plot(wordSizes, groupSaxCorrect['G-' + key], color=colors[i], ls='--', label='G-' + key)
+    
+    plt.title(testDataSet + " (%d classes)" % len(set(trainingLabels.flat)))
     plt.xlabel('Word Size')
     plt.ylabel('Percent Correct')
 
-    legend = ax.legend(loc='upper right', shadow=True)
+    # Shrink current axis by 20%
+    box = ax.get_position()
+    ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
+
+    # Put a legend to the right of the current axis
+    ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+
     plt.savefig(testDataSet + '.png')
-    #plt.show()
+    plt.show()
     
 
 
