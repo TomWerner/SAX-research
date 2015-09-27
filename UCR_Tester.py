@@ -2,12 +2,15 @@ import numpy as np
 import math
 import time
 import matplotlib.pyplot as plt
+from scipy.stats import norm
 
 class SAX:
     def __init__(self, wordSize = 8, alphabetSize = 7, epsilon = 1e-6):
         self.wordSize = wordSize
         self.alphabetSize = alphabetSize
         self.epsilon = epsilon
+        self.alphabet = np.array(range(0, alphabetSize))
+        self.breakpoints = [norm.ppf(x / alphabetSize) for x in range(1, alphabetSize)]
         
     def normalize(self, data):
         # Gives data a mean of zero and a standard deviation of 1
@@ -60,26 +63,7 @@ class SAX:
         return result
 
     def getBreakpoints(self):
-        breakpoints = {'3' : [-0.43, 0.43],
-                                '4' : [-0.67, 0, 0.67],
-                                '5' : [-0.84, -0.25, 0.25, 0.84],
-                                '6' : [-0.97, -0.43, 0, 0.43, 0.97],
-                                '7' : [-1.07, -0.57, -0.18, 0.18, 0.57, 1.07],
-                                '8' : [-1.15, -0.67, -0.32, 0, 0.32, 0.67, 1.15],
-                                '9' : [-1.22, -0.76, -0.43, -0.14, 0.14, 0.43, 0.76, 1.22],
-                                '10': [-1.28, -0.84, -0.52, -0.25, 0, 0.25, 0.52, 0.84, 1.28],
-                                '11': [-1.34, -0.91, -0.6, -0.35, -0.11, 0.11, 0.35, 0.6, 0.91, 1.34],
-                                '12': [-1.38, -0.97, -0.67, -0.43, -0.21, 0, 0.21, 0.43, 0.67, 0.97, 1.38],
-                                '13': [-1.43, -1.02, -0.74, -0.5, -0.29, -0.1, 0.1, 0.29, 0.5, 0.74, 1.02, 1.43],
-                                '14': [-1.47, -1.07, -0.79, -0.57, -0.37, -0.18, 0, 0.18, 0.37, 0.57, 0.79, 1.07, 1.47],
-                                '15': [-1.5, -1.11, -0.84, -0.62, -0.43, -0.25, -0.08, 0.08, 0.25, 0.43, 0.62, 0.84, 1.11, 1.5],
-                                '16': [-1.53, -1.15, -0.89, -0.67, -0.49, -0.32, -0.16, 0, 0.16, 0.32, 0.49, 0.67, 0.89, 1.15, 1.53],
-                                '17': [-1.56, -1.19, -0.93, -0.72, -0.54, -0.38, -0.22, -0.07, 0.07, 0.22, 0.38, 0.54, 0.72, 0.93, 1.19, 1.56],
-                                '18': [-1.59, -1.22, -0.97, -0.76, -0.59, -0.43, -0.28, -0.14, 0, 0.14, 0.28, 0.43, 0.59, 0.76, 0.97, 1.22, 1.59],
-                                '19': [-1.62, -1.25, -1, -0.8, -0.63, -0.48, -0.34, -0.2, -0.07, 0.07, 0.2, 0.34, 0.48, 0.63, 0.8, 1, 1.25, 1.62],
-                                '20': [-1.64, -1.28, -1.04, -0.84, -0.67, -0.52, -0.39, -0.25, -0.13, 0, 0.13, 0.25, 0.39, 0.52, 0.67, 0.84, 1.04, 1.28, 1.64]
-                                }
-        return breakpoints[str(self.alphabetSize)]
+        return self.breakpoints
 
     def toAlphabet(self, paaData):
         alphabet = "abcdefghijklmnopqrstuvwxyz"[0:self.alphabetSize]
@@ -129,9 +113,13 @@ class SAX:
     def letterDistance(self, letter1, letter2):
         if abs(ord(letter1) - ord(letter2)) <= 1:
             return 0
-        return self.getBreakpoints()[max(ord(letter1), ord(letter2)) - ord('a') - 1] -\
-               self.getBreakpoints()[min(ord(letter1), ord(letter2)) - ord('a')]
-
+        first = max(ord(letter1), ord(letter2)) - ord('a') - 1
+        second = min(ord(letter1), ord(letter2)) - ord('a')
+        try:
+            return self.getBreakpoints()[first] - self.getBreakpoints()[second]
+        except:
+            print(letter1, letter2, first, second, self.getBreakpoints(), self.alphabetSize)
+            raise
 
 
 
@@ -178,7 +166,7 @@ def classifySAX(sax, trainingSaxData, trainingLabels, unknownSaxObj):
     predictedClass = None
     for i, trainingRow in enumerate(trainingSaxData):
         # mindist distance
-        distance = s.minDist(trainingRow, unknownSaxObj)
+        distance = sax.minDist(trainingRow, unknownSaxObj)
         if distance < bestSoFar:
             bestSoFar = distance
             predictedClass = trainingLabels[i]
@@ -200,10 +188,11 @@ def determineCorrect(trainData, trainLabels, testData, testLabels, classifyMetho
             correct += 1
     return correct
     
-testFiles = ['CBF', 'Coffee', 'ECG200', 'FaceAll', 'FaceFour', 'Fish',
-             'Gun_Point', 'Lightning2', 'Lightning7', 'OliveOil', 'OSULeaf',
-             'synthetic_control', 'SwedishLeaf', 'Trace', 'Two_Patterns', 'Wafter', 'yoga']
-
+#testFiles = ['CBF', 'Coffee', 'ECG200', 'FaceAll', 'FaceFour', 'Fish',
+#             'Gun_Point', 'Lighting2', 'Lighting7', 'OliveOil', 'OSULeaf',
+#             'synthetic_control', 'SwedishLeaf', 'Trace', 'Two_Patterns', 'wafer', 'yoga']
+#testFiles = ['wafer', 'yoga']
+testFiles = ['coffee']
 for testDataSet in testFiles:
 
     trainingData, trainingLabels = loadUCRData(UCR_DIRECTORY + testDataSet + "/" + testDataSet + "_TRAIN")
@@ -220,9 +209,11 @@ for testDataSet in testFiles:
     groupSaxCorrect2 = []
     wordSizes = [1, 2, 4, 6, 8, 10, ]
 
-    alphabetSize = 5
-    alphabetSize2 = min(20, max(len(set(trainingLabels.flat)), 3))
-
+    #alphabetSize = 5
+    #alphabetSize2 = min(20, max(len(set(trainingLabels.flat)), 3))
+    #alphabetSize = len(set(trainingLabels.flat))
+    alphabetSize2 = 10 #len(set(trainingLabels.flat)) * 2
+    alphabetSize = 20
 
     for wordSize in wordSizes:
         print(testDataSet, "with word size", wordSize)
@@ -238,7 +229,7 @@ for testDataSet in testFiles:
         groupSaxCorrect.append(determineCorrect(*groupSaxData, classifyMethod = "SAX", argList=[s]))
 
 
-        s2 = SAX(wordSize = wordSize, alphabetSize = alphabetSize2)
+        s2 = SAX(wordSize=wordSize, alphabetSize=alphabetSize2)
         trainingDataSAX = [s2.toSAX(data) for data in trainingData]
         testingDataSAX = [s2.toSAX(data) for data in testingData]
         trainingDataGroupSAX = [s2.toGroupSAX(data) for data in trainingData]
@@ -246,12 +237,13 @@ for testDataSet in testFiles:
         saxData2 = [trainingDataSAX, trainingLabels, testingDataSAX, testingLabels]
         groupSaxData2 = [trainingDataGroupSAX, trainingLabels, testingDataGroupSAX, testingLabels]
 
-        saxCorrect2.append(determineCorrect(*saxData, classifyMethod = "SAX", argList=[s2]))
-        groupSaxCorrect2.append(determineCorrect(*groupSaxData, classifyMethod = "SAX", argList=[s2]))
+        saxCorrect2.append(determineCorrect(*saxData2, classifyMethod = "SAX", argList=[s2]))
+        groupSaxCorrect2.append(determineCorrect(*groupSaxData2, classifyMethod = "SAX", argList=[s2]))
 
     euclideanCorrect = np.array([euclideanCorrect] * len(wordSizes)) / len(testingData)
     saxCorrect = np.array(saxCorrect) / len(testingData)
     groupSaxCorrect = np.array(groupSaxCorrect) / len(testingData)
+    
     saxCorrect2 = np.array(saxCorrect2) / len(testingData)
     groupSaxCorrect2 = np.array(groupSaxCorrect2) / len(testingData)
     
@@ -267,8 +259,8 @@ for testDataSet in testFiles:
     plt.ylabel('Percent Correct')
 
     legend = ax.legend(loc='upper right', shadow=True)
-
-    plt.show()
+    plt.savefig(testDataSet + '.png')
+    #plt.show()
     
 
 
