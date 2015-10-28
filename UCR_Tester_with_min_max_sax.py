@@ -53,39 +53,6 @@ class SAX:
                 result.append(chunk.min())
         return np.array(result)
 
-    def toPAA3(self, data):
-        result = []
-        n = len(data)
-        numFrames = int(math.ceil(float(n) / float(self.wordSize)))
-        breakpoints = self.getBreakpoints()
-
-        for i in range(numFrames):
-            startIndex = self.wordSize * i
-            endIndex = min(self.wordSize * (i + 1), n) # wordsize or end of data
-            # Take the mean of the chunk
-            chunk = np.array(data[startIndex: endIndex])
-            approx = np.mean(chunk)
-
-            counts = np.zeros(self.alphabetSize)
-            for point in data[startIndex: endIndex]:
-                found = False
-                for i in range(len(breakpoints)):
-                    if point < breakpoints[i] and not found:
-                        counts[i] += 1
-                        found = True
-                        break
-                if not found:
-                    counts[-1] += 1
-
-            if approx > 0:
-                # Take the max mode
-                result.append(self.alphabet[counts.argmax()])
-            else:
-                # Take the min mode
-                result.append(self.alphabet[::-1][counts[::-1].argmax()])
-
-        return np.array(result)
-
     def toGroupPAA(self, data):
         result = []
         n = len(data)
@@ -140,13 +107,6 @@ class SAX:
         normalizedData = self.normalize(data)
         paaData = self.toPAA2(normalizedData)
         alphaData = self.toAlphabet(paaData)
-
-        return alphaData
-
-    def toSAX3(self, data):
-        self.originalLength = len(data)
-        normalizedData = self.normalize(data)
-        alphaData = self.toPAA3(normalizedData)
 
         return alphaData
 
@@ -295,8 +255,8 @@ for testDataSet in testFiles:
         s = SAX(wordSize = wordSize, alphabetSize = alphabetSize)
         trainingDataSAX = [s.toSAX(data) for data in trainingData]
         testingDataSAX = [s.toSAX(data) for data in testingData]
-        trainingDataGroupSAX = [s.toSAX3(data) for data in trainingData]
-        testingDataGroupSAX = [s.toSAX3(data) for data in testingData]
+        trainingDataGroupSAX = [s.toSAX2(data) for data in trainingData]
+        testingDataGroupSAX = [s.toSAX2(data) for data in testingData]
 
         for i in range(0, 5): # 32, 16, 8, 4
             saxData = [shiftSax(trainingDataSAX, i), trainingLabels, shiftSax(testingDataSAX, i), testingLabels]
@@ -338,7 +298,7 @@ for testDataSet in testFiles:
     # Put a legend to the right of the current axis
     ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 
-    plt.savefig("min-max-group-" + testDataSet + '.png')
+    plt.savefig("min-max-" + testDataSet + '.png')
     #plt.show()
     
 

@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import norm
 
 class SAX:
-    def __init__(self, wordSize=8, alphabetSize=7, epsilon=1e-6):
+    def __init__(self, wordSize = 8, alphabetSize = 7, epsilon = 1e-6):
         self.wordSize = wordSize
         self.alphabetSize = alphabetSize
         self.epsilon = epsilon
@@ -34,56 +34,6 @@ class SAX:
             # Take the mean of the chunk
             approx = np.mean(np.array(data[startIndex: endIndex]))
             result.append(approx)
-        return np.array(result)
-
-    def toPAA2(self, data):
-        result = []
-        n = len(data)
-        numFrames = int(math.ceil(float(n) / float(self.wordSize)))
-    
-        for i in range(numFrames):
-            startIndex = self.wordSize * i
-            endIndex = min(self.wordSize * (i + 1), n) # wordsize or end of data
-            # Take the mean of the chunk
-            chunk = np.array(data[startIndex: endIndex])
-            approx = np.mean(chunk)
-            if approx > 0:
-                result.append(chunk.max())
-            else:
-                result.append(chunk.min())
-        return np.array(result)
-
-    def toPAA3(self, data):
-        result = []
-        n = len(data)
-        numFrames = int(math.ceil(float(n) / float(self.wordSize)))
-        breakpoints = self.getBreakpoints()
-
-        for i in range(numFrames):
-            startIndex = self.wordSize * i
-            endIndex = min(self.wordSize * (i + 1), n) # wordsize or end of data
-            # Take the mean of the chunk
-            chunk = np.array(data[startIndex: endIndex])
-            approx = np.mean(chunk)
-
-            counts = np.zeros(self.alphabetSize)
-            for point in data[startIndex: endIndex]:
-                found = False
-                for i in range(len(breakpoints)):
-                    if point < breakpoints[i] and not found:
-                        counts[i] += 1
-                        found = True
-                        break
-                if not found:
-                    counts[-1] += 1
-
-            if approx > 0:
-                # Take the max mode
-                result.append(self.alphabet[counts.argmax()])
-            else:
-                # Take the min mode
-                result.append(self.alphabet[::-1][counts[::-1].argmax()])
-
         return np.array(result)
 
     def toGroupPAA(self, data):
@@ -132,21 +82,6 @@ class SAX:
         normalizedData = self.normalize(data)
         paaData = self.toPAA(normalizedData)
         alphaData = self.toAlphabet(paaData)
-
-        return alphaData
-        
-    def toSAX2(self, data):
-        self.originalLength = len(data)
-        normalizedData = self.normalize(data)
-        paaData = self.toPAA2(normalizedData)
-        alphaData = self.toAlphabet(paaData)
-
-        return alphaData
-
-    def toSAX3(self, data):
-        self.originalLength = len(data)
-        normalizedData = self.normalize(data)
-        alphaData = self.toPAA3(normalizedData)
 
         return alphaData
 
@@ -257,15 +192,15 @@ def shiftSax(saxArray, amt):
 #             'Gun_Point', 'Lighting2', 'Lighting7', 'OliveOil', 'OSULeaf',
 #             'synthetic_control', 'SwedishLeaf', 'Trace', 'Two_Patterns', 'wafer', 'yoga']
 #testFiles = ['wafer', 'yoga']
-# testFiles = ['CBF', 'synthetic_control', 'coffee', 'Fish', 'Lighting2', 'Lighting7', 'Trace']
-# testFiles = ['MiddlePhalanxOutlineAgeGroup', 'ArrowHead', 'Beef', 'MiddlePhalanxOutlineCorrect',
-#              'BeetleFly', 'MoteStrain', 'BirdChicken', 'Car', 'OliveOil', 'Plane', 'ShapeletSim']
-# testFiles = ['50words', 'Adiac']
-# testFiles = ['ECG200']
-# testFiles = ['Ham']
-# testFiles = ['Meat']
-# testFiles = ['BirdChicken']
-# testFiles = ['CBF']
+testFiles = ['CBF', 'synthetic_control', 'coffee', 'Fish', 'Lighting2', 'Lighting7', 'Trace']
+testFiles = ['MiddlePhalanxOutlineAgeGroup', 'ArrowHead', 'Beef', 'MiddlePhalanxOutlineCorrect',
+             'BeetleFly', 'MoteStrain', 'BirdChicken', 'Car', 'OliveOil', 'Plane', 'ShapeletSim']
+testFiles = ['50words', 'Adiac']
+testFiles = ['ECG200']
+testFiles = ['Ham']
+testFiles = ['Meat']
+testFiles = ['BirdChicken']
+testFiles = ['CBF']
 
 
 testFiles = ['Beef', 'OliveOil', 'Coffee']
@@ -287,7 +222,7 @@ for testDataSet in testFiles:
     euclideanCorrect = determineCorrect(*data, classifyMethod = "Euclidean")
     saxCorrect = {}
     groupSaxCorrect = {}
-    wordSizes = [1, 2, 3, 4, 5, 6]
+    wordSizes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ]
     alphabetSize = 64
 
     for wordSize in wordSizes:
@@ -295,8 +230,8 @@ for testDataSet in testFiles:
         s = SAX(wordSize = wordSize, alphabetSize = alphabetSize)
         trainingDataSAX = [s.toSAX(data) for data in trainingData]
         testingDataSAX = [s.toSAX(data) for data in testingData]
-        trainingDataGroupSAX = [s.toSAX3(data) for data in trainingData]
-        testingDataGroupSAX = [s.toSAX3(data) for data in testingData]
+        trainingDataGroupSAX = [s.toGroupSAX(data) for data in trainingData]
+        testingDataGroupSAX = [s.toGroupSAX(data) for data in testingData]
 
         for i in range(0, 5): # 32, 16, 8, 4
             saxData = [shiftSax(trainingDataSAX, i), trainingLabels, shiftSax(testingDataSAX, i), testingLabels]
@@ -338,7 +273,7 @@ for testDataSet in testFiles:
     # Put a legend to the right of the current axis
     ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 
-    plt.savefig("min-max-group-" + testDataSet + '.png')
+    plt.savefig("tuesday-" + testDataSet + '.png')
     #plt.show()
     
 
