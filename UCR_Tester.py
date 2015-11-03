@@ -3,6 +3,8 @@ import math
 import time
 import matplotlib.pyplot as plt
 from scipy.stats import norm
+import sys
+
 
 class SAX:
     def __init__(self, wordSize=8, alphabetSize=7, epsilon=1e-6):
@@ -23,7 +25,8 @@ class SAX:
             return np.array([0 for x in array])
         return (array - array.mean()) / standardDev
 
-    def toPAA(self, data):
+    # Takes the average of each chunk
+    def to_standard_paa(self, data):
         result = []
         n = len(data)
         numFrames = int(math.ceil(float(n) / float(self.wordSize)))
@@ -36,7 +39,8 @@ class SAX:
             result.append(approx)
         return np.array(result)
 
-    def toPAA2(self, data):
+    # Takes the max of a chunk if the average is above zero, the min otherwise
+    def min_max_PAA(self, data):
         result = []
         n = len(data)
         numFrames = int(math.ceil(float(n) / float(self.wordSize)))
@@ -53,7 +57,8 @@ class SAX:
                 result.append(chunk.min())
         return np.array(result)
 
-    def toPAA3(self, data):
+    # if the avg is above zero, breaks ties to the max, else breaks ties to the min
+    def min_max_group_tie_breaker(self, data):
         result = []
         n = len(data)
         numFrames = int(math.ceil(float(n) / float(self.wordSize)))
@@ -86,7 +91,7 @@ class SAX:
 
         return np.array(result)
 
-    def toGroupPAA(self, data):
+    def group_sax(self, data):
         result = []
         n = len(data)
         numFrames = int(math.ceil(float(n) / float(self.wordSize)))
@@ -127,33 +132,33 @@ class SAX:
                 result.append(self.alphabet[-1])
         return np.array(result)
         
-    def toSAX(self, data):
+    def to_standard_sax(self, data):
         self.originalLength = len(data)
         normalizedData = self.normalize(data)
-        paaData = self.toPAA(normalizedData)
+        paaData = self.to_standard_paa(normalizedData)
         alphaData = self.toAlphabet(paaData)
 
         return alphaData
         
-    def toSAX2(self, data):
+    def to_min_max_sax(self, data):
         self.originalLength = len(data)
         normalizedData = self.normalize(data)
-        paaData = self.toPAA2(normalizedData)
+        paaData = self.min_max_PAA(normalizedData)
         alphaData = self.toAlphabet(paaData)
 
         return alphaData
 
-    def toSAX3(self, data):
+    def to_min_max_group_sax(self, data):
         self.originalLength = len(data)
         normalizedData = self.normalize(data)
-        alphaData = self.toPAA3(normalizedData)
+        alphaData = self.min_max_group_tie_breaker(normalizedData)
 
         return alphaData
 
-    def toGroupSAX(self, data):
+    def to_group_sax(self, data):
         self.originalLength = len(data)
         normalizedData = self.normalize(data)
-        alphaData = self.toGroupPAA(normalizedData)
+        alphaData = self.group_sax(normalizedData)
 
         return alphaData
 
@@ -186,7 +191,8 @@ class SAX:
 
 
 
-UCR_DIRECTORY = '/Users/test/fall_2015/research/UCR_TS_Archive_2015/'
+# UCR_DIRECTORY = '/Users/test/fall_2015/research/UCR_TS_Archive_2015/'
+UCR_DIRECTORY = r'C:\Users\Tom\Documents\fall_2015\research\UCR_TS_Archive_2015\\'
 
 def loadUCRData(path):
     file = open(path, 'r')
@@ -252,31 +258,30 @@ def determineCorrect(trainData, trainLabels, testData, testLabels, classifyMetho
 
 def shiftSax(saxArray, amt):
     return np.right_shift(saxArray, amt)
-    
-#testFiles = ['CBF', 'Coffee', 'ECG200', 'FaceAll', 'FaceFour', 'Fish',
-#             'Gun_Point', 'Lighting2', 'Lighting7', 'OliveOil', 'OSULeaf',
-#             'synthetic_control', 'SwedishLeaf', 'Trace', 'Two_Patterns', 'wafer', 'yoga']
-#testFiles = ['wafer', 'yoga']
-# testFiles = ['CBF', 'synthetic_control', 'coffee', 'Fish', 'Lighting2', 'Lighting7', 'Trace']
-# testFiles = ['MiddlePhalanxOutlineAgeGroup', 'ArrowHead', 'Beef', 'MiddlePhalanxOutlineCorrect',
-#              'BeetleFly', 'MoteStrain', 'BirdChicken', 'Car', 'OliveOil', 'Plane', 'ShapeletSim']
-# testFiles = ['50words', 'Adiac']
-# testFiles = ['ECG200']
-# testFiles = ['Ham']
-# testFiles = ['Meat']
-# testFiles = ['BirdChicken']
-# testFiles = ['CBF']
 
-
+testFiles = ['ChlorineConcentration']
 testFiles = ['Beef', 'OliveOil', 'Coffee']
-testFiles += ['Earthquakes', 'ChlorineConcentration']
+testFiles += ['Earthquakes',]
 testFiles += ['SmallKitchenAppliances', 'LargeKitchenAppliances', 'TwoLeadECG', 'ECGFiveDays']#, 'FordA', 'FordB', 'ElectricDevices', 'ECG5000']
 testFiles += ['ItalyPowerDemand', 'Plane', 'Car']
 testFiles += ['ECG200']
 testFiles += ['Computers', ]
 
-for testDataSet in testFiles:
+if len(sys.argv) > 1:
+    print("Running on UCR dataset", sys.argv[1])
+    testFiles = [sys.argv[1]]
 
+
+def convert_train_data(sax_instance, data, test_type):
+    test_dictionary = {
+        "Standard SAX": sax_instance.to_standard_sax,
+        "Max Group": sax_instance.to_group_sax,
+        "Min Max Group": sax_instance.to_min_max_group_sax,
+        "Min Max SAX": sax_instance.to_min_max_sax,
+    }
+    return [test_dictionary[test_type](data) for data in trainingData]
+
+for testDataSet in testFiles:
     trainingData, trainingLabels = loadUCRData(UCR_DIRECTORY + testDataSet + "/" + testDataSet + "_TRAIN")
     testingData, testingLabels = loadUCRData(UCR_DIRECTORY + testDataSet + "/" + testDataSet + "_TEST")
     data = [trainingData, trainingLabels, testingData, testingLabels]
@@ -284,49 +289,54 @@ for testDataSet in testFiles:
     print("Train size:", len(trainingData))
     print("Test size:", len(testingData))
 
-    euclideanCorrect = determineCorrect(*data, classifyMethod = "Euclidean")
-    saxCorrect = {}
-    groupSaxCorrect = {}
+    euclideanCorrect = determineCorrect(*data, classifyMethod="Euclidean")
+
+    tests = {
+        "Standard SAX": ("red", {}),
+        "Max Group": ('cyan', {}),
+        "Min Max Group": ('green', {}),
+        "Min Max SAX": ('black', {})
+    }
+
     wordSizes = [1, 2, 3, 4, 5, 6]
     alphabetSize = 64
 
     for wordSize in wordSizes:
-        print(testDataSet, "with word size", wordSize)
-        s = SAX(wordSize = wordSize, alphabetSize = alphabetSize)
-        trainingDataSAX = [s.toSAX(data) for data in trainingData]
-        testingDataSAX = [s.toSAX(data) for data in testingData]
-        trainingDataGroupSAX = [s.toSAX3(data) for data in trainingData]
-        testingDataGroupSAX = [s.toSAX3(data) for data in testingData]
+        for test in tests:
+            print("Testing", testDataSet, "with word size", wordSize, "and algorithm", test)
+            s = SAX(wordSize=wordSize, alphabetSize=alphabetSize)
+            train_data = convert_train_data(s, trainingData, test)
+            test_data = convert_train_data(s, testingData, test)
 
-        for i in range(0, 5): # 32, 16, 8, 4
-            saxData = [shiftSax(trainingDataSAX, i), trainingLabels, shiftSax(testingDataSAX, i), testingLabels]
-            groupSaxData = [shiftSax(trainingDataGroupSAX, i), trainingLabels, shiftSax(testingDataGroupSAX,i), testingLabels]
+            for i in [0, 3]: # 64, 8
+                data_package = [shiftSax(train_data, i), trainingLabels, shiftSax(test_data, i), testingLabels]
 
-            
-            
-            key = "SAX a=%d" % (alphabetSize >> i)
-            temp = saxCorrect.get(key, [])
-            temp.append(determineCorrect(*saxData, classifyMethod = "SAX", argList=[s]))
-            saxCorrect[key] = temp
-        
-            key = 'G-' + key
-            temp = groupSaxCorrect.get(key, [])
-            temp.append(determineCorrect(*groupSaxData, classifyMethod = "SAX", argList=[s]))
-            groupSaxCorrect[key] = temp
+                key = test + " a=%d" % (alphabetSize >> i)
+                temp = tests[test][1].get(key, [])
+                temp.append(determineCorrect(*data_package, classifyMethod="SAX", argList=[s]))
+                tests[test][1][key] = temp
 
+    # Convert to correct percentage
     euclideanCorrect = np.array([euclideanCorrect] * len(wordSizes)) / len(testingData)
-    for key in saxCorrect.keys():
-        saxCorrect[key] = np.array(saxCorrect[key]) / len(testingData)
-        groupSaxCorrect["G-" + key] = np.array(groupSaxCorrect["G-" + key]) / len(testingData)
+    for test in tests.keys():
+        for key in tests[test][1].keys():
+            tests[test][1][key] = np.array(tests[test][1][key]) / len(testingData)
     
     fig, ax = plt.subplots()
     ax.plot(wordSizes, euclideanCorrect, 'k:', label="Euclidean")
 
-    colors = ['red', 'blue', 'darkgreen', 'cyan', 'black']
-    for i, key in enumerate(sorted(saxCorrect.keys())):
-        ax.plot(wordSizes, saxCorrect[key], color=colors[i], label=key)
-        ax.plot(wordSizes, groupSaxCorrect['G-' + key], color=colors[i], ls='--', label='G-' + key)
-    
+    # big and small alphabet
+    styles = ['-', '--']
+
+    max_value = 0
+    min_value = 0
+    for k, test in enumerate(tests.keys()):
+        for i, key in enumerate(tests[test][1].keys()):
+            max_value = max(max_value, max(tests[test][1][key]))
+            min_value = min(min_value, max(tests[test][1][key]))
+            ax.plot(wordSizes, tests[test][1][key] + .005 * i * (k**2), color=tests[test][0], ls=styles[i], lw=4, label=key)
+
+    plt.ylim([min_value - .1, max_value + .1])
     plt.title(testDataSet + " (%d classes)" % len(set(trainingLabels.flat)))
     plt.xlabel('Word Size')
     plt.ylabel('Percent Correct')
@@ -338,8 +348,8 @@ for testDataSet in testFiles:
     # Put a legend to the right of the current axis
     ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 
-    plt.savefig("min-max-group-" + testDataSet + '.png')
-    #plt.show()
+    plt.savefig("all-four-" + testDataSet + '.png')
+    # plt.show()
     
 
 
