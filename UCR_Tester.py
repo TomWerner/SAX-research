@@ -191,8 +191,8 @@ class SAX:
 
 
 
-# UCR_DIRECTORY = '/Users/test/fall_2015/research/UCR_TS_Archive_2015/'
-UCR_DIRECTORY = r'C:\Users\Tom\Documents\fall_2015\research\UCR_TS_Archive_2015\\'
+UCR_DIRECTORY = '/Users/test/fall_2015/research/UCR_TS_Archive_2015/'
+# UCR_DIRECTORY = r'C:\Users\Tom\Documents\fall_2015\research\UCR_TS_Archive_2015\\'
 
 def loadUCRData(path):
     file = open(path, 'r')
@@ -259,27 +259,27 @@ def determineCorrect(trainData, trainLabels, testData, testLabels, classifyMetho
 def shiftSax(saxArray, amt):
     return np.right_shift(saxArray, amt)
 
-testFiles = ['ChlorineConcentration']
 testFiles = ['Beef', 'OliveOil', 'Coffee']
 testFiles += ['Earthquakes',]
 testFiles += ['SmallKitchenAppliances', 'LargeKitchenAppliances', 'TwoLeadECG', 'ECGFiveDays']#, 'FordA', 'FordB', 'ElectricDevices', 'ECG5000']
 testFiles += ['ItalyPowerDemand', 'Plane', 'Car']
 testFiles += ['ECG200']
 testFiles += ['Computers', ]
+testFiles += ['ChlorineConcentration']
 
 if len(sys.argv) > 1:
     print("Running on UCR dataset", sys.argv[1])
     testFiles = [sys.argv[1]]
 
 
-def convert_train_data(sax_instance, data, test_type):
+def convert_train_data(sax_instance, dataset, test_type):
     test_dictionary = {
-        "Standard SAX": sax_instance.to_standard_sax,
-        "Max Group": sax_instance.to_group_sax,
-        "Min Max Group": sax_instance.to_min_max_group_sax,
-        "Min Max SAX": sax_instance.to_min_max_sax,
+        "SAX": sax_instance.to_standard_sax,
+        "Max G": sax_instance.to_group_sax,
+        "MiMa G": sax_instance.to_min_max_group_sax,
+        "MiMa SAX": sax_instance.to_min_max_sax,
     }
-    return [test_dictionary[test_type](data) for data in trainingData]
+    return [test_dictionary[test_type](dat_piece) for dat_piece in dataset]
 
 for testDataSet in testFiles:
     trainingData, trainingLabels = loadUCRData(UCR_DIRECTORY + testDataSet + "/" + testDataSet + "_TRAIN")
@@ -292,10 +292,10 @@ for testDataSet in testFiles:
     euclideanCorrect = determineCorrect(*data, classifyMethod="Euclidean")
 
     tests = {
-        "Standard SAX": ("red", {}),
-        "Max Group": ('cyan', {}),
-        "Min Max Group": ('green', {}),
-        "Min Max SAX": ('black', {})
+        "SAX": ("red", {}),
+        "Max G": ('cyan', {}),
+        "MiMa G": ('green', {}),
+        "MiMa SAX": ('black', {})
     }
 
     wordSizes = [1, 2, 3, 4, 5, 6]
@@ -331,10 +331,11 @@ for testDataSet in testFiles:
     max_value = 0
     min_value = 0
     for k, test in enumerate(tests.keys()):
-        for i, key in enumerate(tests[test][1].keys()):
+        for i, key in enumerate(sorted(tests[test][1].keys())):
+            # print(i, test,key)
             max_value = max(max_value, max(tests[test][1][key]))
             min_value = min(min_value, max(tests[test][1][key]))
-            ax.plot(wordSizes, tests[test][1][key] + .005 * i * (k**2), color=tests[test][0], ls=styles[i], lw=4, label=key)
+            ax.plot(wordSizes, tests[test][1][key], color=tests[test][0], ls=styles[i], lw=2, label=key)
 
     plt.ylim([min_value - .1, max_value + .1])
     plt.title(testDataSet + " (%d classes)" % len(set(trainingLabels.flat)))
@@ -343,7 +344,7 @@ for testDataSet in testFiles:
 
     # Shrink current axis by 20%
     box = ax.get_position()
-    ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
+    ax.set_position([box.x0, box.y0, box.width * 0.7, box.height])
 
     # Put a legend to the right of the current axis
     ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))

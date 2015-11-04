@@ -1,0 +1,107 @@
+Group SAX outperformed SAX with higher word size
+	- BirdChicken (2 classes, low alpha group sax outperformed at high word size)
+	- Car (4 classes, only slight outperform, ~= euc)
+	- Lighting2 (2 classes, G-SAX spiked for high alpha, otherwise meh)
+	- MiddlePhalanxOutlineCorrect (2 classes, G-SAX best for a=16,32)
+	- Plane (7 classes, G-SAX stayed very competitive, outperf low alpha)
+
+Group SAX underperformed
+         - 50words (50 classes)
+         - ArrowHead (3 classes, only slightly)
+	 - Beef (5 classes, at low word size G-SAX was a little better)
+	 - BeetleFly (2 classes, low alphabet outperformed)
+	 - CBF (3 classes, High alpha best, G-sax better for lowest alpha)	
+	 - Coffee (2 classes, high alpha best, G-sax better for lower alpha)
+	 - ECG200 (2 classes, high alpha best)
+	 - Fish (7 classes, higher alpha => better results)
+	 - Ham (2 classes, G-SAX generally lower)
+	 - Lighting7 (7 classes, G-SAX had spikes, but wasn't generally better)
+	 - MiddlePhalanxOutlineAgeGroup (3 classes, high alpha best, but big spike for G-SAX)
+	 - ShapeletSim (2 classes, G-SAX had spike at w=8, but sax outperf)
+	 - synthetic_control (6 classes, high alhpa best, outperf G-SAX and euc)
+
+SAX underperformed
+ - Adiac (37 classes)
+ - Meat (3 classes, but G-SAX for a=32 best)
+ - MoteStrain (2 classes, G-SAX outperformed, but still a little less than euc)
+ - OliveOil (4 classes, dismal SAX performance)
+ - Trace (4 classes, high alpha best, g-sax had spike at w=6, still a little less than euc)
+
+//Classification of Household Devices by Electricity Usage Profiles 
+// Measurements of usage
+Small kitchen Kettle, microwave, toaster
+Large kitchen Dishwasher, tumble dryer, washing machine
+Refrigeration Fridge/freezer, refrigerator, upright freezer
+Computers Desktop, laptop
+Screen CRT TV, LCD TV, computer monitor
+
+// https://www.uea.ac.uk/~ajb/Papers/BagnallSDM2012.pdf
+// Transformation Based Ensembles for Time Series Classification
+// Food spectograms
+Beef
+Olive Oil
+Coffee
+// engine noise data 
+FordA - typical operating conditions
+FordB - noisy operating conditions
+// Earthquake data from california
+Earthquakes - classify any reading over 5 on richter scale
+// Electrial device power consumption
+ElectricalDevices
+// Hand outlines (see paper for details, basically length from bottom of image to top of hand pixel by pixel)
+HandOutlines
+
+// Time Series Classification through Transformation and Ensembles
+Car and Plane maybe? no details
+
+// http://www.cs.cmu.edu/afs/cs/project/spirit-1/www/ J. M. VanBriesen. Chlorine levels data
+ChlorineConcentration - chlorine levels in 8 different households
+
+// Fusion Methods for Time-Series Classification
+TwoLeadECG
+ECGFiveDays - both ECG records
+
+// http://webcache.googleusercontent.com/search?q=cache:CSVCzT6ftpkJ:www.timeseriesclassification.com/description.php%3Fdataset_id%3D38+&cd=9&hl=en&ct=clnk&gl=us
+ItalyPower - This is utilized to cluster the power usage of an institution. The assignment is to recognize days from October to March (comprehensive) from April to September
+
+//Grammar-guided Feature Extraction for Time Series Classification
+Lightning 2 and 7 - Measuring the RF radiation from lightning
+
+//Finding Anomalous Periodic Time Series: An Application to Catalogs of Periodic Variable Stars
+StarLightCurves - photometric time series data
+
+// Making Time-series Classification More Accurate Using Learned Constraints 
+Trace - It is a synthetic dataset designed to simulate instrumentation failures in a nuclear power plant, created by Davide Roverso. 
+
+// Generalized Feature Extraction for Structural Pattern Recognition in Time-Series Data
+wafer - measurements recorded by one sensor during the processing of one wafer by one tool
+
+MoteStrain - not found
+
+// Logical-Shapelets: An Expressive Primitive for Time Series Classification
+SonyRobot 1,2 - Each time series represents one walk cycle, x axis of robot
+
+Image Outline Classification
+ -DistPhalanxAge DistPhalanxOutline DistPhalanxTW FaceAll FaceFour WordSynonyms
+ -MidPhalanxAge MidPhalanxOutline MidPhalanxTW OSULeaf Phalanges yoga
+ -ProxPhalanxAge ProxPhalanxOutline ProxPhalanxTW Herring SwedishLeaf MedicalImages
+ -Symbols Adiac ArrowHead BeetleFly BirdChicken DiatomSize
+ -FacesUCR fiftywords fish
+
+Motion Classification
+ -CricketX CricketY CricketZ UWaveX UWaveY UWaveZ
+ -GunPoint Haptics InlineSkate ToeSeg1 ToeSeg2 MutantWorms2
+ -MutantWorms5
+
+Sensor Reading Classification
+ -Beef Car Chlorine Coffee Computers SmallKitchen
+ -FordA FordB ItalyPower LargeKitchen Lightning2 Lightning7
+ -StarLightCurves Trace wafer RefrigerationDevices MoteStrain Earthquakes
+ -ElectricDevices SonyRobot1 SonyRobot2 OliveOil Plane Screen
+
+Human Sensor Reading Classification
+ - TwoLeadECG ECGFiveDays ECGThorax1 ECGThorax2
+
+Simulated Classification Problems
+ - MALLAT CBF SyntheticControl TwoPatterns
+
